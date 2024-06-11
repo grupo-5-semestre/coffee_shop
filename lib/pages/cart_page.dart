@@ -19,12 +19,8 @@ class _CartPageState extends State<CartPage> {
   }
 
   //pay button tapped
-  void payNow() {
-    /*
-
-    fill out your payment service here
-
-    */
+  void doOrder() {
+    // TODO: implementar fazer pedido
   }
 
   @override
@@ -60,7 +56,7 @@ class _CartPageState extends State<CartPage> {
 
               //pay button
               GestureDetector(
-                onTap: payNow,
+                onTap: doOrder,
                 child: Container(
                   padding: const EdgeInsets.all(25),
                   width: double.infinity,
@@ -70,7 +66,7 @@ class _CartPageState extends State<CartPage> {
                   ),
                   child: const Center(
                     child: Text(
-                      "Pagamento",
+                      "Fazer pedido",
                       style: TextStyle(color: Colors.white),
                     ),
                   ),
