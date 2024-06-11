@@ -10,6 +10,12 @@ class CoffeeShop extends ChangeNotifier {
     addProducts();
   }
 
+// Getter para recuperar a lista de cafés disponíveis (supõe-se que seja uma propriedade privada _shop)
+  List<Coffee> get coffeeShop => _shop;
+
+// Getter para acessar o carrinho de compras do usuário
+  List<Coffee> get userCart => _userCart;
+
   void addProducts() async {
     List<dynamic> products = await Requests.getProducts();
 
@@ -20,13 +26,8 @@ class CoffeeShop extends ChangeNotifier {
         imagePath: product['image'],
       ));
     }
+    notifyListeners();
   }
-
-// Getter para recuperar a lista de cafés disponíveis (supõe-se que seja uma propriedade privada _shop)
-  List<Coffee> get coffeeShop => _shop;
-
-// Getter para acessar o carrinho de compras do usuário
-  List<Coffee> get userCart => _userCart;
 
 // Método para adicionar um item ao carrinho
   void addItemToCart(Coffee coffee) {

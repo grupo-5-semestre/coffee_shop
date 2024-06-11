@@ -20,8 +20,9 @@ class _ShopPageState extends State<ShopPage> {
     // let user know it add been successfully addead
     showDialog(
       context: context,
-      builder: (context) => AlertDialog(
-          title: Text("Produto adiciondo ao carrinho com sucesso!")),
+      builder: (context) => const AlertDialog(
+        title: Text("Produto adiciondo ao carrinho com sucesso!"),
+      ),
     );
   }
 
