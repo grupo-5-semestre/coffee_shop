@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
-import 'package:flutter_application_1/components/coffe.tile.dart';
-import 'package:flutter_application_1/models/coffee.dart';
-import 'package:flutter_application_1/models/coffee_shop.dart';
+import 'package:coffee_shop/components/coffe.tile.dart';
+import 'package:coffee_shop/models/coffee.dart';
+import 'package:coffee_shop/models/coffee_shop.dart';
 import 'package:provider/provider.dart';
 
 class CartPage extends StatefulWidget {

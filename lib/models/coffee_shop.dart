@@ -1,37 +1,26 @@
 import 'package:flutter/material.dart';
 import 'coffee.dart';
+import '../api/requests.dart';
 
 class CoffeeShop extends ChangeNotifier {
-  // coffee for sale list
-  final List<Coffee> _shop = [
-    // black coffee
-    Coffee(
-      name: 'Affogato',
-      price: '4.10',
-      imagePath: 'lib/imagens/Affogato.png',
-    ),
-    // latte
-    Coffee(
-      name: 'Café',
-      price: '4.15',
-      imagePath: 'lib/imagens/Café.png',
-    ),
-    // espresso
-    Coffee(
-      name: 'Café com Leite',
-      price: '3.50',
-      imagePath: 'lib/imagens/CaféLeite.png',
-    ),
-    // iced coffee
-    Coffee(
-      name: 'Cappuccino',
-      price: '4.50',
-      imagePath: 'lib/imagens/Cappuccino.png',
-    ),
-  ];
+  final List<Coffee> _shop = [];
+  final List<Coffee> _userCart = [];
 
-  // Define a lista para armazenar os itens no carrinho do usuário
-  List<Coffee> _userCart = [];
+  CoffeeShop() {
+    addProducts();
+  }
+
+  void addProducts() async {
+    List<dynamic> products = await Requests.getProducts();
+
+    for (var product in products) {
+      _shop.add(Coffee(
+        name: product['name'],
+        price: product['price'],
+        imagePath: product['image'],
+      ));
+    }
+  }
 
 // Getter para recuperar a lista de cafés disponíveis (supõe-se que seja uma propriedade privada _shop)
   List<Coffee> get coffeeShop => _shop;

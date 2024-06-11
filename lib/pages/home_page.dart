@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_application_1/components/bottom_nav_bar.dart';
-import 'package:flutter_application_1/const.dart';
-import 'package:flutter_application_1/pages/cart_page.dart';
-import 'package:flutter_application_1/pages/shop_page.dart';
+import 'package:coffee_shop/components/bottom_nav_bar.dart';
+import 'package:coffee_shop/const.dart';
+import 'package:coffee_shop/pages/cart_page.dart';
+import 'package:coffee_shop/pages/shop_page.dart';
 
 class HomePage extends StatefulWidget {
   const HomePage({super.key});
@@ -16,13 +16,12 @@ class _HomePageState extends State<HomePage> {
   int _selectedIndex = 0;
 
   void navigateBottomBar(int? index) {
-  if (index != null) {
-    setState(() {
-      _selectedIndex = index;
-    });
+    if (index != null) {
+      setState(() {
+        _selectedIndex = index;
+      });
+    }
   }
-}
-
 
   // pages
   final List<Widget> _pages = [
