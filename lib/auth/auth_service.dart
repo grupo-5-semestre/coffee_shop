@@ -1,4 +1,5 @@
 import 'dart:convert';
+import 'package:localstorage/localstorage.dart';
 import 'package:http/http.dart' as http;
 
 class AuthService {
@@ -6,7 +7,7 @@ class AuthService {
   static String? authToken;
 
   // URL do endpoint de login
-  static const String loginUrl = "http://10.0.2.2:8000/api/login";
+  static const String loginUrl = "http://10.0.2.2:8000/api/login/";
 
   // Método para realizar o login e obter o token
   static Future<bool> login(String email, String password) async {
@@ -20,8 +21,7 @@ class AuthService {
       );
 
       if (response.statusCode == 200) {
-        var token = jsonDecode(response.body)['token'];
-        authToken = token; // Armazena o token recebido
+        localStorage.setItem('access_token', jsonDecode(response.body));
         isLoggedIn = true;
         return true;
       } else {
