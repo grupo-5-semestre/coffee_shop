@@ -21,7 +21,9 @@ class AuthService {
       );
 
       if (response.statusCode == 200) {
-        localStorage.setItem('access_token', jsonDecode(response.body));
+        await initLocalStorage();
+        localStorage.setItem(
+            'access_token', jsonDecode(response.body)["access_token"]);
         isLoggedIn = true;
         return true;
       } else {

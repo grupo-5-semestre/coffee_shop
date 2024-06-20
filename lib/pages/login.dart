@@ -56,7 +56,7 @@ class LoginPage extends StatelessWidget {
                 Colors.black.withOpacity(0.05),
                 BlendMode.dstATop,
               ),
-              image: AssetImage('images/coffee_shop.jpg'),
+              image: AssetImage('assets/images/coffee_shop.jpg'),
               fit: BoxFit.cover,
             ),
           ),

@@ -9,12 +9,13 @@ class Requests {
 
   // get all products
   static Future<List<dynamic>> getProducts() async {
-    var response =
-        await http.get(Uri.parse("http://10.0.2.2:8000/api/products"), 
-        headers: {
-          'Authorization': 'Bearer ${localStorage.getItem('access_token')}',
-          'Content-Type': 'application/json'
-          },);
+    var response = await http.get(
+      Uri.parse("http://10.0.2.2:8000/api/products"),
+      headers: {
+        'Authorization': 'Bearer ${localStorage.getItem('access_token')}',
+        'Content-Type': 'application/json'
+      },
+    );
 
     if (response.statusCode == 200) {
       return jsonDecode(response.body) as List<dynamic>;
@@ -22,14 +23,16 @@ class Requests {
 
     return [];
   }
-    // get all products
+
+  // get all products
   static Future<List<dynamic>> getOrders() async {
-    var response =
-        await http.get(Uri.parse("http://10.0.2.2:8000/api/orders"), 
-        headers: {
-          'Authorization': 'Bearer ${localStorage.getItem('access_token')}',
-          'Content-Type': 'application/json'
-          },);
+    var response = await http.get(
+      Uri.parse("http://10.0.2.2:8000/api/orders"),
+      headers: {
+        'Authorization': 'Bearer ${localStorage.getItem('access_token')}',
+        'Content-Type': 'application/json'
+      },
+    );
 
     if (response.statusCode == 200) {
       return jsonDecode(response.body) as List<dynamic>;
