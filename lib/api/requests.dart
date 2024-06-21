@@ -40,4 +40,19 @@ class Requests {
 
     return [];
   }
+
+  static Future<bool> cadastro(String email, String password) async {
+    var response = await http.post(
+      Uri.parse("http://10.0.2.2:8000/api/users/"),
+      body: {
+        'email': email,
+        'password': password,
+      },
+    );
+
+    if (response.statusCode == 201) {
+      return true;
+    }
+    return false;
+  }
 }

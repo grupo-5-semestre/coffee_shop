@@ -1,7 +1,11 @@
 import 'package:coffee_shop/pages/login.dart';
 import 'package:flutter/material.dart';
+import 'package:coffee_shop/api/requests.dart';
 
 class SignupPage extends StatelessWidget {
+  final TextEditingController emailController = TextEditingController();
+  final TextEditingController passwordController = TextEditingController();
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -15,14 +19,14 @@ class SignupPage extends StatelessWidget {
                 Colors.black.withOpacity(0.05),
                 BlendMode.dstATop,
               ),
-              image: AssetImage('assets/images/coffee_shop.jpg'),
+              image: const AssetImage('assets/images/coffee_shop.jpg'),
               fit: BoxFit.cover,
             ),
           ),
           child: Column(
             children: <Widget>[
-              SizedBox(height: 100.0),
-              Padding(
+              const SizedBox(height: 100.0),
+              const Padding(
                 padding: const EdgeInsets.all(16.0),
                 child: Icon(
                   Icons.shopping_cart,
@@ -30,10 +34,11 @@ class SignupPage extends StatelessWidget {
                   size: 50.0,
                 ),
               ),
-              buildTextField(context, "EMAIL", Icons.email, false),
-              buildTextField(context, "PASSWORD", Icons.lock, true),
-              buildTextField(context, "CONFIRM PASSWORD", Icons.lock, true),
-              SizedBox(height: 10.0),
+              buildTextField(
+                  context, "EMAIL", Icons.email, false, emailController),
+              buildTextField(
+                  context, "SENHA", Icons.lock, true, passwordController),
+              const SizedBox(height: 10.0),
               TextButton(
                 onPressed: () {
                   Navigator.push(
@@ -41,7 +46,7 @@ class SignupPage extends StatelessWidget {
                     MaterialPageRoute(builder: (context) => LoginPage()),
                   );
                 },
-                child: Text(
+                child: const Text(
                   "Já tenho uma conta?",
                   style: TextStyle(
                     fontWeight: FontWeight.bold,
@@ -51,8 +56,8 @@ class SignupPage extends StatelessWidget {
                   textAlign: TextAlign.end,
                 ),
               ),
-              SizedBox(height: 20.0),
-              buildButton(context, "SIGN UP", Colors.black, Colors.white),
+              const SizedBox(height: 20.0),
+              buildButton(context, "Cadastrar", Colors.black, Colors.white),
             ],
           ),
         ),
@@ -60,12 +65,12 @@ class SignupPage extends StatelessWidget {
     );
   }
 
-  Widget buildTextField(
-      BuildContext context, String labelText, IconData icon, bool obscureText) {
+  Widget buildTextField(BuildContext context, String labelText, IconData icon,
+      bool obscureText, controller) {
     return Container(
       width: MediaQuery.of(context).size.width * 0.8,
-      margin: EdgeInsets.symmetric(horizontal: 20.0, vertical: 10.0),
-      decoration: BoxDecoration(
+      margin: const EdgeInsets.symmetric(horizontal: 20.0, vertical: 10.0),
+      decoration: const BoxDecoration(
         border: Border(
           bottom: BorderSide(
             color: Colors.black,
@@ -75,13 +80,14 @@ class SignupPage extends StatelessWidget {
         ),
       ),
       child: TextField(
+        controller: controller,
         obscureText: obscureText,
         textAlign: TextAlign.left,
         decoration: InputDecoration(
           prefixIcon: Icon(icon, color: Colors.grey),
           hintText:
               labelText == "EMAIL" ? 'samarthagarwal@live.com' : '*********',
-          hintStyle: TextStyle(color: Colors.grey),
+          hintStyle: const TextStyle(color: Colors.grey),
           border: InputBorder.none,
         ),
       ),
@@ -100,9 +106,30 @@ class SignupPage extends StatelessWidget {
             borderRadius: BorderRadius.circular(30.0),
           ),
         ),
-        onPressed: () {},
+        onPressed: () async {
+          if (await Requests.cadastro(
+              emailController.value.text, passwordController.value.text)) {
+            showDialog(
+                // ignore: use_build_context_synchronously
+                context: context,
+                builder: (context) => const AlertDialog(
+                      title: Text("Usuario cadastrado com sucesso"),
+                    ));
+            Navigator.push(
+              // ignore: use_build_context_synchronously
+              context,
+              MaterialPageRoute(builder: (context) => LoginPage()),
+            );
+          } else {
+            showDialog(
+                context: context,
+                builder: (context) => const AlertDialog(
+                      title: Text("Erro ao cadastrar"),
+                    ));
+          }
+        },
         child: Padding(
-          padding: EdgeInsets.symmetric(vertical: 20.0),
+          padding: const EdgeInsets.symmetric(vertical: 20.0),
           child: Text(
             label,
             textAlign: TextAlign.center,
