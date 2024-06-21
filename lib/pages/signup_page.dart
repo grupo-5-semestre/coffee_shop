@@ -109,12 +109,6 @@ class SignupPage extends StatelessWidget {
         onPressed: () async {
           if (await Requests.cadastro(
               emailController.value.text, passwordController.value.text)) {
-            showDialog(
-                // ignore: use_build_context_synchronously
-                context: context,
-                builder: (context) => const AlertDialog(
-                      title: Text("Usuario cadastrado com sucesso"),
-                    ));
             Navigator.push(
               // ignore: use_build_context_synchronously
               context,
